@@ -1,0 +1,12 @@
+Package: unetlab-integration
+Priority: extra
+Section: net
+Installed-Size: 755
+Maintainer: Sergei Eremenko <finalitik@gmail.com>
+Architecture: all
+Version: 0.1.0
+Depends: telnet, wireshark, xterm | x-terminal-emulator
+Recommends: vinagre, docker-engine | docker.io
+Homepage: http://github.com/SmartFinn/unetlab-handlers
+Description: UNetLab integration with debian-based desktop
+ Package providing telnet://, capture:// and docker:// protocols.

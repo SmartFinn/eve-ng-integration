@@ -1,0 +1,23 @@
+#!/bin/bash
+
+URI=(`echo $1 | \
+	sed -r 's%^(.*)://([a-Z0-9\\-\\.]+):?([0-9]+)?/?(.*)$%x\1 x\2 x\3 x\4%'`)
+
+URI_SCHEME=${URI[0]#x}
+URI_HOST=${URI[1]#x}
+URI_PORT=${URI[2]#x}
+URI_PATH=${URI[3]#x}
+
+case "$URI_SCHEME" in
+	telnet)
+		x-terminal-emulator -e "telnet $URI_HOST $URI_PORT"
+		;;
+	capture)
+		ssh -l root $URI_HOST tcpdump -s 0 -U -n -i $URI_PATH -w - | \
+			wireshark -k -i -
+		;;
+	docker)
+		x-terminal-emulator -e "docker -H $URI_HOST:$URI_PORT attach \
+			${URI_PATH%%\?*}"
+		;;
+esac

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Update cache of .desktop file MIME types
+update-desktop-database -q || true

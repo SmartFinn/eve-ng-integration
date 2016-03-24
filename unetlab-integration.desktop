@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=UNetLab Integration
+Exec=unetlab-integration %u
+TryExec=unetlab-integration
+Type=Application
+Categories=Network;
+MimeType=x-scheme-handler/telnet;x-scheme-handler/capture;x-scheme-handler/docker;
+X-KDE-Protocols=telnet,capture,docker
+NoDisplay=true
