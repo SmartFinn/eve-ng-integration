@@ -1,4 +1,4 @@
-Package: unetlab-integration
+Package: unetlab-x-integration
 Priority: extra
 Section: net
 Installed-Size: 755
@@ -8,5 +8,11 @@ Version: 0.1.0
 Depends: telnet, wireshark, xterm | x-terminal-emulator
 Recommends: vinagre, docker-engine | docker.io
 Homepage: http://github.com/SmartFinn/unetlab-handlers
-Description: UNetLab integration with debian-based desktop
- Package providing telnet://, capture:// and docker:// protocols.
+Description: a tool which helps UNetLab to integrate with Ubuntu/Debian
+ This package provides the following protocols:
+  * telnet://
+  * capture://
+  * docker://
+  * vnc:// (via Vinagre)
+  * rdp:// (via Vinagre)
+  * ssh:// (via Vinagre)

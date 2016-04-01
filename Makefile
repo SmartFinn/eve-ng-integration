@@ -10,15 +10,15 @@ prepare_deb: clean
 	cp debian/control build/DEBIAN/control
 	cp debian/postinst build/DEBIAN/postinst
 	cp debian/postrm build/DEBIAN/postrm
-	cp unetlab-integration build/usr/bin/unetlab-integration
-	cp unetlab-integration.desktop \
-		build/usr/share/applications/unetlab-integration.desktop
+	cp unetlab-x-integration build/usr/bin/unetlab-x-integration
+	cp unetlab-x-integration.desktop \
+		build/usr/share/applications/unetlab-x-integration.desktop
 	chmod 755 build/DEBIAN build/usr build/usr/bin build/usr/share \
 		build/usr/share/applications \
-		build/usr/bin/unetlab-integration \
+		build/usr/bin/unetlab-x-integration \
 		build/DEBIAN/post*
 	chmod 644 build/DEBIAN/control \
-		build/usr/share/applications/unetlab-integration.desktop
+		build/usr/share/applications/unetlab-x-integration.desktop
 
 deb: prepare_deb
 	fakeroot dpkg-deb --build build $(DEB)
