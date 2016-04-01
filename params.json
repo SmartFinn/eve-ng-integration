@@ -1,0 +1,6 @@
+{
+  "name": "UNetLab-X-Integration",
+  "tagline": "a tool which helps UNetLab to integrate with Ubuntu/Debian",
+  "body": "### Description\r\nUNetLab-X-Integration is the equivalent of [Windows integration pack](http://www.unetlab.com/download/UNetLab-Win-Client-Pack.exe) for Ubuntu/Debian.\r\n\r\nAfter install the package you can open URLs like the following:\r\n* telnet://\r\n* capture://\r\n* docker://\r\n* vnc:// (via Vinagre)\r\n* rdp:// (via Vinagre)\r\n* ssh:// (via Vinagre)\r\n\r\nTested on Ubuntu 14.04 with Google Chrome and Firefox.",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
