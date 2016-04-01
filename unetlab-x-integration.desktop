@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=UNetLab Integration
-Exec=unetlab-integration %u
-TryExec=unetlab-integration
+Name=UNetLab-X-Integration
+Exec=unetlab-x-integration %u
+TryExec=unetlab-x-integration
 Type=Application
 Categories=Network;
 MimeType=x-scheme-handler/telnet;x-scheme-handler/capture;x-scheme-handler/docker;

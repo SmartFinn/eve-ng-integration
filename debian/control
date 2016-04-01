@@ -4,7 +4,7 @@ Section: net
 Installed-Size: 755
 Maintainer: Sergei Eremenko <finalitik@gmail.com>
 Architecture: all
-Version: 0.1.0
+Version: 0.1.1
 Depends: telnet, wireshark, xterm | x-terminal-emulator
 Recommends: vinagre, docker-engine | docker.io
 Homepage: http://github.com/SmartFinn/unetlab-handlers
