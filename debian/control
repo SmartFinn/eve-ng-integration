@@ -7,7 +7,7 @@ Architecture: all
 Version: 0.1.1
 Depends: telnet, wireshark, xterm | x-terminal-emulator
 Recommends: vinagre, docker-engine | docker.io
-Homepage: http://github.com/SmartFinn/unetlab-handlers
+Homepage: http://smartfinn.github.io/unetlab-x-integration/
 Description: a tool which helps UNetLab to integrate with Ubuntu/Debian
  This package provides the following protocols:
   * telnet://
