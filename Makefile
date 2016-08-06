@@ -25,6 +25,6 @@ deb: prepare_deb
 
 clean:
 	-rm -rf build/
-	-rm -f $(DEB)
+	-rm -f *.deb
 
 .PHONY: all prepare_deb deb clean
