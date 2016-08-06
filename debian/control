@@ -4,7 +4,7 @@ Section: net
 Installed-Size: 755
 Maintainer: Sergei Eremenko <finalitik@gmail.com>
 Architecture: all
-Version: 0.1.1
+Version: 0.1.2
 Depends: telnet, wireshark, ssh-askpass-gnome | ssh-askpass, xterm | x-terminal-emulator
 Recommends: vinagre, docker-engine | docker.io
 Homepage: http://smartfinn.github.io/unetlab-x-integration/
