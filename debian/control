@@ -5,7 +5,7 @@ Installed-Size: 755
 Maintainer: Sergei Eremenko <finalitik@gmail.com>
 Architecture: all
 Version: 0.1.1
-Depends: telnet, wireshark, xterm | x-terminal-emulator
+Depends: telnet, wireshark, ssh-askpass-gnome | ssh-askpass, xterm | x-terminal-emulator
 Recommends: vinagre, docker-engine | docker.io
 Homepage: http://smartfinn.github.io/unetlab-x-integration/
 Description: a tool which helps UNetLab to integrate with Ubuntu/Debian
