@@ -1,23 +1,42 @@
-#!/bin/bash
+#!/usr/bin/env python
+# See https://github.com/SmartFinn/unetlab-x-integration/
 
-URI=(`echo $1 | \
-	sed -r 's%^(.*)://([a-Z0-9\\-\\.]+):?([0-9]+)?/?(.*)$%x\1 x\2 x\3 x\4%'`)
+from __future__ import print_function
+from subprocess import Popen
 
-URI_SCHEME=${URI[0]#x}
-URI_HOST=${URI[1]#x}
-URI_PORT=${URI[2]#x}
-URI_PATH=${URI[3]#x}
+import sys
 
-case "$URI_SCHEME" in
-	telnet)
-		x-terminal-emulator -e "telnet $URI_HOST $URI_PORT"
-		;;
-	capture)
-		ssh -l root $URI_HOST tcpdump -s 0 -U -n -i $URI_PATH -w - | \
-			wireshark -k -i -
-		;;
-	docker)
-		x-terminal-emulator -e "docker -H $URI_HOST:$URI_PORT attach \
-			${URI_PATH%%\?*}"
-		;;
-esac
+
+def main(argv):
+    try:
+        from urllib.parse import urlparse
+    except ImportError:
+        from urlparse import urlparse
+
+    u = urlparse(argv)
+
+    d = {
+        'host': u.hostname,
+        'port': u.port,
+        'path': u.path.lstrip('/'),
+    }
+
+    if u.scheme == 'capture':
+        Popen('ssh -l root {host} tcpdump -s 0 -U -n -i {path} -w - | \
+            wireshark -k -i -'.format(**d), shell=True)
+    elif u.scheme == 'docker':
+        Popen('x-terminal-emulator -e \
+            "docker -H {host}:{port} attach {path}"'.format(**d), shell=True)
+    elif u.scheme == 'telnet':
+        Popen('x-terminal-emulator -e "telnet {host} {port}"'.format(**d),
+              shell=True)
+    else:
+        return 'URL "{}" is currently not supported.'.format(u.geturl())
+
+
+if __name__ == '__main__':
+    try:
+        sys.exit(main(sys.argv[1]))
+    except IndexError:
+        print('usage:', __file__, '<url>', file=sys.stderr)
+        sys.exit(1)
