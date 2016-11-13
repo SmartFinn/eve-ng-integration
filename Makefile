@@ -27,4 +27,17 @@ clean:
 	-rm -rf build/
 	-rm -f *.deb
 
-.PHONY: all prepare_deb deb clean
+install:
+	mkdir -p /usr/bin /usr/share/applications
+	cp -f unetlab-x-integration /usr/bin/unetlab-x-integration
+	cp -f unetlab-x-integration.desktop \
+		/usr/share/applications/unetlab-x-integration.desktop
+	chmod 755 /usr/bin/unetlab-x-integration
+	chmod 644 /usr/share/applications/unetlab-x-integration.desktop
+	update-desktop-database -q || true
+
+uninstall:
+	-rm -f /usr/bin/unetlab-x-integration
+	-rm -f /usr/share/applications/unetlab-x-integration.desktop
+
+.PHONY: all prepare_deb deb clean install uninstall
