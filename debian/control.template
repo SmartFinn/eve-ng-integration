@@ -1,13 +1,25 @@
+#!/bin/sh
+
+CONTROL_FILE="${BUILD_DIR:=./build}/DEBIAN/control"
+VERSION=`git describe --tags --always --long | sed -e 's/^[a-Z]*//' -e 's/-g[0-9a-f]\+$//'`
+SIZE=`du -bsL "${BUILD_DIR:=./build}" | cut -f 1`
+
+if [ -f "$CONTROL_FILE" ]; then
+	echo "File '${CONTROL_FILE}' already exits!"
+	exit 1
+fi
+
+cat > "$CONTROL_FILE" << EOF
 Package: unetlab-x-integration
 Priority: extra
 Section: net
-Installed-Size: 1396
 Maintainer: Sergei Eremenko <finalitik@gmail.com>
 Architecture: all
-Version: 0.2.0
+Version: ${VERSION}
+Installed-Size: ${SIZE}
 Depends: python, ssh-askpass-gnome | ssh-askpass, telnet, vinagre, wireshark, xterm | x-terminal-emulator
-Recommends: docker-engine | docker.io
-Homepage: http://smartfinn.github.io/unetlab-x-integration/
+Suggests: docker-engine | docker.io
+Homepage: http://github.com/smartfinn/unetlab-x-integration/
 Description: a tool which helps UNetLab to integrate with Ubuntu/Debian
  This package provides the following protocols:
   * telnet://
@@ -16,3 +28,4 @@ Description: a tool which helps UNetLab to integrate with Ubuntu/Debian
   * vnc:// (via Vinagre)
   * rdp:// (via Vinagre)
   * ssh:// (via Vinagre)
+EOF
