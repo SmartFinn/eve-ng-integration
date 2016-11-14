@@ -1,31 +1,6 @@
-PKG_NAME    := $(shell awk '/^Package:/ {print $$2}' debian/control)
-PKG_VERSION := $(shell awk '/^Version:/ {print $$2}' debian/control)
-PKG_ARCH    := $(shell awk '/^Architecture:/ {print $$2}' debian/control)
-DEB := $(PKG_NAME)_$(PKG_VERSION)_$(PKG_ARCH).deb
+BUILD_DIR := ./build
 
-all: deb
-
-prepare_deb: clean
-	mkdir -p build/DEBIAN build/usr/bin build/usr/share/applications
-	cp debian/control build/DEBIAN/control
-	cp debian/postinst build/DEBIAN/postinst
-	cp debian/postrm build/DEBIAN/postrm
-	cp unetlab-x-integration build/usr/bin/unetlab-x-integration
-	cp unetlab-x-integration.desktop \
-		build/usr/share/applications/unetlab-x-integration.desktop
-	chmod 755 build/DEBIAN build/usr build/usr/bin build/usr/share \
-		build/usr/share/applications \
-		build/usr/bin/unetlab-x-integration \
-		build/DEBIAN/post*
-	chmod 644 build/DEBIAN/control \
-		build/usr/share/applications/unetlab-x-integration.desktop
-
-deb: prepare_deb
-	fakeroot dpkg-deb --build build $(DEB)
-
-clean:
-	-rm -rf build/
-	-rm -f *.deb
+all: install
 
 install:
 	mkdir -p /usr/bin /usr/share/applications
@@ -40,4 +15,39 @@ uninstall:
 	-rm -f /usr/bin/unetlab-x-integration
 	-rm -f /usr/share/applications/unetlab-x-integration.desktop
 
-.PHONY: all prepare_deb deb clean install uninstall
+prepare_deb: clean
+	mkdir -p $(BUILD_DIR)/DEBIAN \
+		$(BUILD_DIR)/usr/bin \
+		$(BUILD_DIR)/usr/share/applications
+	# copy files
+	cp debian/postinst $(BUILD_DIR)/DEBIAN/postinst
+	cp debian/postrm $(BUILD_DIR)/DEBIAN/postrm
+	cp unetlab-x-integration $(BUILD_DIR)/usr/bin/unetlab-x-integration
+	cp unetlab-x-integration.desktop \
+		$(BUILD_DIR)/usr/share/applications/unetlab-x-integration.desktop
+	# generate DEBIAN/control
+	BUILD_DIR=$(BUILD_DIR) sh debian/control.template
+	# fix permissions
+	chmod 755 $(BUILD_DIR)/DEBIAN \
+		$(BUILD_DIR)/usr \
+		$(BUILD_DIR)/usr/bin \
+		$(BUILD_DIR)/usr/share \
+		$(BUILD_DIR)/usr/share/applications \
+		$(BUILD_DIR)/usr/bin/unetlab-x-integration \
+		$(BUILD_DIR)/DEBIAN/post*
+	chmod 644 $(BUILD_DIR)/DEBIAN/control \
+		$(BUILD_DIR)/usr/share/applications/unetlab-x-integration.desktop
+
+deb: prepare_deb
+	$(eval PKG_FILENAME := $(shell awk ' \
+		/^Package:/      {name=$$2} \
+		/^Version:/      {vers=$$2} \
+		/^Architecture:/ {arch=$$2} \
+		END {print name "_" vers "_" arch}' $(BUILD_DIR)/DEBIAN/control))
+	fakeroot dpkg-deb --build build $(PKG_FILENAME).deb
+
+clean:
+	-rm -rf $(BUILD_DIR)/
+	-rm -f *.deb
+
+.PHONY: all install uninstall prepare_deb deb clean
