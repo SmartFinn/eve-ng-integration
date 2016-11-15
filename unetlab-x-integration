@@ -22,11 +22,16 @@ def main(argv):
     }
 
     if u.scheme == 'capture':
-        Popen('ssh -l root {host} tcpdump -s 0 -U -n -i {path} -w - | \
-            wireshark -k -i -'.format(**d), shell=True)
+        ssh_options = (
+            '-o', 'UserKnownHostsFile=/dev/null',
+            '-o', 'StrictHostKeyChecking=no')
+
+        Popen('ssh {options} -l root {host} tcpdump -s 0 -U -n -i {path} -w - | \
+              wireshark -k -i -'.format(options=' '.join(ssh_options), **d),
+              shell=True)
     elif u.scheme == 'docker':
         Popen('x-terminal-emulator -e \
-            "docker -H {host}:{port} attach {path}"'.format(**d), shell=True)
+              "docker -H {host}:{port} attach {path}"'.format(**d), shell=True)
     elif u.scheme == 'telnet':
         Popen('x-terminal-emulator -e "telnet {host} {port}"'.format(**d),
               shell=True)
