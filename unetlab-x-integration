@@ -13,32 +13,33 @@ def main(argv):
     except ImportError:
         from urlparse import urlparse
 
-    u = urlparse(argv)
+    url = urlparse(argv)
 
-    d = {
-        'host': u.hostname,
-        'port': u.port,
-        'path': u.path.lstrip('/'),
+    data = {
+        'host': url.hostname,
+        'port': url.port,
+        'path': url.path.lstrip('/'),
     }
 
-    if u.scheme == 'capture':
+    if url.scheme == 'capture':
         cmd = 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \
-              -l root {host} tcpdump -i {path} -n -s 0 -U -w -'.format(**d)
+              -l root {host} tcpdump -i {path} -n -s 0 -U -w -'.format(**data)
+        wireshark_cmd = 'wireshark -k -i -'
 
-        ssh_tcpdump = Popen(cmd.split(), stdout=PIPE)
-        wireshark = Popen(['wireshark', '-k', '-i-'], stdin=ssh_tcpdump.stdout)
+        tcpdump = Popen(cmd.split(), stdout=PIPE)
+        wireshark = Popen(wireshark_cmd.split(), stdin=tcpdump.stdout)
         wireshark.communicate()
-    elif u.scheme == 'docker':
+    elif url.scheme == 'docker':
         cmd = 'x-terminal-emulator -e \
-              docker -H {host}:{port} attach {path}'.format(**d)
+              docker -H {host}:{port} attach {path}'.format(**data)
 
         Popen(cmd.split())
-    elif u.scheme == 'telnet':
-        cmd = 'x-terminal-emulator -e telnet {host} {port}'.format(**d)
+    elif url.scheme == 'telnet':
+        cmd = 'x-terminal-emulator -e telnet {host} {port}'.format(**data)
 
         Popen(cmd.split())
     else:
-        return 'URL "{}" is currently not supported.'.format(u.geturl())
+        return 'URL "{}" is currently not supported.'.format(url.geturl())
 
 
 if __name__ == '__main__':
