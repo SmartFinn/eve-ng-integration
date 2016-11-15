@@ -2,7 +2,7 @@
 # See https://github.com/SmartFinn/unetlab-x-integration/
 
 from __future__ import print_function
-from subprocess import Popen
+from subprocess import Popen, PIPE
 
 import sys
 
@@ -22,19 +22,21 @@ def main(argv):
     }
 
     if u.scheme == 'capture':
-        ssh_options = (
-            '-o', 'UserKnownHostsFile=/dev/null',
-            '-o', 'StrictHostKeyChecking=no')
+        cmd = 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \
+              -l root {host} tcpdump -i {path} -n -s 0 -U -w -'.format(**d)
 
-        Popen('ssh {options} -l root {host} tcpdump -s 0 -U -n -i {path} -w - | \
-              wireshark -k -i -'.format(options=' '.join(ssh_options), **d),
-              shell=True)
+        ssh_tcpdump = Popen(cmd.split(), stdout=PIPE)
+        wireshark = Popen(['wireshark', '-k', '-i-'], stdin=ssh_tcpdump.stdout)
+        wireshark.communicate()
     elif u.scheme == 'docker':
-        Popen('x-terminal-emulator -e \
-              "docker -H {host}:{port} attach {path}"'.format(**d), shell=True)
+        cmd = 'x-terminal-emulator -e \
+              docker -H {host}:{port} attach {path}'.format(**d)
+
+        Popen(cmd.split())
     elif u.scheme == 'telnet':
-        Popen('x-terminal-emulator -e "telnet {host} {port}"'.format(**d),
-              shell=True)
+        cmd = 'x-terminal-emulator -e telnet {host} {port}'.format(**d)
+
+        Popen(cmd.split())
     else:
         return 'URL "{}" is currently not supported.'.format(u.geturl())
 
