@@ -26,7 +26,7 @@ If your Linux distribution is not supported yet, don't give up, try [Manual inst
   ```
   or download and extract the tarball
   ```
-  wget -O unetlab-x-integration.tar.gz https://github.com/SmartFinn/unetlab-x-integration/archive/master.tar.gz
+  wget -O unetlab-x-integration.tar.gz https://github.com/SmartFinn/unetlab-x-integration/tarball/master
   tar -xzvf unetlab-x-integration.tar.gz
   ```
 
