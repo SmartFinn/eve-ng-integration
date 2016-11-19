@@ -3,17 +3,21 @@ BUILD_DIR := ./build
 all: install
 
 install:
-	mkdir -p /usr/bin /usr/share/applications
-	cp -f unetlab-x-integration /usr/bin/unetlab-x-integration
-	cp -f unetlab-x-integration.desktop \
-		/usr/share/applications/unetlab-x-integration.desktop
-	chmod 755 /usr/bin/unetlab-x-integration
-	chmod 644 /usr/share/applications/unetlab-x-integration.desktop
+	install -m 755 -d /usr/bin/
+	install -m 755 -d /usr/share/applications/
+	install -m 755 unetlab-x-integration /usr/bin/
+	install -m 644 unetlab-x-integration.desktop /usr/share/applications/
+
 	update-desktop-database -q || true
 
 uninstall:
 	-rm -f /usr/bin/unetlab-x-integration
 	-rm -f /usr/share/applications/unetlab-x-integration.desktop
+
+defaults:
+	xdg-mime default unetlab-x-integration.desktop x-scheme-handler/capture
+	xdg-mime default unetlab-x-integration.desktop x-scheme-handler/telnet
+	xdg-mime default unetlab-x-integration.desktop x-scheme-handler/docker
 
 prepare_deb: clean
 	mkdir -p $(BUILD_DIR)/DEBIAN \
