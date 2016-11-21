@@ -1,15 +1,17 @@
 #!/bin/sh
 
-CONTROL_FILE="${BUILD_DIR:=./build}/DEBIAN/control"
-VERSION=`git describe --tags --always --long | sed -e 's/^[a-Z]*//' -e 's/-g[0-9a-f]\+$//'`
-SIZE=`du -bsL "${BUILD_DIR:=./build}" | cut -f 1`
+set -e
 
-if [ -f "$CONTROL_FILE" ]; then
-	echo "File '${CONTROL_FILE}' already exits!"
+CONTROL="${BUILD_DIR:=./build}/DEBIAN/control"
+VERSION=$(git describe --tags --always --long | sed -e 's/^[a-Z]*//' -e 's/-g[0-9a-f]\+$//')
+SIZE=$(du -bsL "${BUILD_DIR:=./build}" | cut -f 1)
+
+if [ -f "$CONTROL" ]; then
+	echo "File '$CONTROL' already exits!"
 	exit 1
 fi
 
-cat > "$CONTROL_FILE" << EOF
+cat <<-EOF > "$CONTROL"
 Package: unetlab-x-integration
 Priority: extra
 Section: net
