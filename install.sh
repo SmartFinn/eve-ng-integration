@@ -100,6 +100,12 @@ for dist_id in $ID $ID_LIKE; do
 				telnet vinagre wireshark-qt x11-openssh-askpass
 			do_install
 			;;
+		opensuse|suse)
+			verbose "Install dependencies..."
+			eval $SUDO zypper install -y ${PYTHON="python"} \
+				openssh-askpass telnet vinagre wireshark-ui-qt
+			do_install
+			;;
 		*)
 			continue
 			;;
