@@ -54,4 +54,15 @@ clean:
 	-rm -rf $(BUILD_DIR)/
 	-rm -f *.deb
 
-.PHONY: all install uninstall prepare_deb deb clean
+check_release:
+ifndef TAG
+	$(error TAG is not defined. Pass via "make release TAG=v0.1.2")
+endif
+
+release: check_release
+	git tag $(TAG)
+	git push origin master
+	git push origin --tags
+	$(MAKE) deb
+
+.PHONY: all install uninstall prepare_deb deb clean check_release release
