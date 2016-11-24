@@ -7,7 +7,7 @@
 
 set -e
 
-URL="https://github.com/SmartFinn/unetlab-x-integration/tarball/master"
+URL="https://github.com/SmartFinn/unetlab-x-integration/archive/master.tar.gz"
 
 # add sudo if user is not root
 [ "$(whoami)" = root ] || SUDO="sudo"

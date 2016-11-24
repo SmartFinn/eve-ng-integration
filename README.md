@@ -36,14 +36,14 @@ If your Linux distribution is not supported yet, don't give up, try [Manual inst
   ```
   or download and extract the tarball
   ```
-  wget -O unetlab-x-integration.tar.gz https://github.com/SmartFinn/unetlab-x-integration/tarball/master
+  wget -O unetlab-x-integration.tar.gz https://github.com/SmartFinn/unetlab-x-integration/archive/master.tar.gz
   tar -xzvf unetlab-x-integration.tar.gz
   ```
 
 2. Run `make install` as root
 
   ```
-  cd unetlab-x-integration/
+  cd unetlab-x-integration/unetlab-x-integration-master
   sudo make install
   ```
 
