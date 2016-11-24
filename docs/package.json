@@ -1,0 +1,20 @@
+{
+  "name": "Cayman",
+  "version": "1.0.0",
+  "homepage": "http://github.com/jasonlong/cayman-theme",
+  "author": "Jason Long",
+  "scss": "./scss/cayman.scss",
+  "scripts": {
+    "build": "grunt sass && grunt postcss",
+    "clean": "test -d ./node_modules && rm -rf ./node_modules",
+    "watch": "grunt watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.5.3",
+    "grunt": "~1.0.1",
+    "grunt-browser-sync": "~2.1.1",
+    "grunt-contrib-watch": "~1.0.0",
+    "grunt-postcss": "^0.8.0",
+    "grunt-sass": "~1.1.0"
+  }
+}
