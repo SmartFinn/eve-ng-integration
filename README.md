@@ -1,7 +1,13 @@
 # UNetLab-X-Integration
 
-This repo contains the equivalent of [Windows integration pack](http://www.unetlab.com/download/UNetLab-Win-Client-Pack.exe) for Ubuntu/Debian and other Linux distos.
+This repo contains the equivalent of [UNetLab Windows integration pack](http://www.unetlab.com/download/UNetLab-Win-Client-Pack.exe) for Ubuntu/Debian and other Linux distros.
 
+Currently supports the following URL schemes:
+
+* `telnet://`
+* `capture://`
+* `docker://`
+* `vnc://` _(via Vinagre)_
 
 ## Installation
 

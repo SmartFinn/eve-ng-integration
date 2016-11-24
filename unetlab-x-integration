@@ -91,7 +91,8 @@ def main(argv):
 
         term.execute(cmd)
     else:
-        return 'URL "{}" is currently not supported.'.format(url.geturl())
+        return '{}: The protocol {} is not supported.'.format(url.geturl(),
+                                                              url.scheme)
 
 
 if __name__ == '__main__':

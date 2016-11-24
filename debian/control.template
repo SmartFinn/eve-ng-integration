@@ -22,12 +22,9 @@ Installed-Size: ${SIZE}
 Depends: python, ssh-askpass-gnome | ssh-askpass, telnet, vinagre, wireshark, xterm | x-terminal-emulator
 Suggests: docker-engine | docker.io
 Homepage: http://github.com/smartfinn/unetlab-x-integration/
-Description: a tool which helps UNetLab to integrate with Ubuntu/Debian
- This package provides the following protocols:
+Description: URL handler for telnet://, capture:// and docker:// URIs
+ This package provides URL handler for the following URL schemes:
   * telnet://
   * capture://
   * docker://
-  * vnc:// (via Vinagre)
-  * rdp:// (via Vinagre)
-  * ssh:// (via Vinagre)
 EOF
