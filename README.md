@@ -19,7 +19,7 @@ Alternatively, you can install it from terminal with the following command:
 wget -qO- https://raw.github.com/SmartFinn/unetlab-x-integration/master/install.sh | sh
 ```
 
-This method works on other Linux distros too. Currently supported installation on **Arch Linux**, **Manjaro**, **Fedora**, **openSUSE** and more...
+This method works on other Linux distros too. Tested on **Arch Linux**, **Manjaro**, **Fedora**, **openSUSE** and potentially works with other systems.
 
 If your Linux distribution is not supported yet, don't give up, try [Manual install](#manual-install) or create [new issue](https://github.com/SmartFinn/unetlab-x-integration/issues).
 
