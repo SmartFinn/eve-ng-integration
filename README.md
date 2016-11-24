@@ -1,6 +1,6 @@
-[https://img.shields.io/github/release/smartfinn/unetlab-x-integration.svg](https://github.com/SmartFinn/unetlab-x-integration/releases)
-[https://img.shields.io/github/issues-closed/smartfinn/unetlab-x-integration.svg](https://github.com/SmartFinn/unetlab-x-integration/issues?q=is%3Aissue+is%3Aclosed)
-[https://img.shields.io/github/issues-pr-closed/smartfinn/unetlab-x-integration.svg](https://github.com/SmartFinn/unetlab-x-integration/pulls?q=is%3Apr+is%3Aclosed)
+[![releases](https://img.shields.io/github/release/smartfinn/unetlab-x-integration.svg)](https://github.com/SmartFinn/unetlab-x-integration/releases)
+[![issues-closed](https://img.shields.io/github/issues-closed/smartfinn/unetlab-x-integration.svg)](https://github.com/SmartFinn/unetlab-x-integration/issues?q=is%3Aissue+is%3Aclosed)
+[![issues-pr-closed](https://img.shields.io/github/issues-pr-closed/smartfinn/unetlab-x-integration.svg)](https://github.com/SmartFinn/unetlab-x-integration/pulls?q=is%3Apr+is%3Aclosed)
 
 # UNetLab-X-Integration
 
