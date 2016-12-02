@@ -3,14 +3,14 @@ BUILD_DIR := ./build
 all: deb
 
 install:
-	install -m 755 -D -t /usr/bin/ unetlab-x-integration
-	install -m 644 -D -t /usr/share/applications/ unetlab-x-integration.desktop
+	install -m 755 -D -t $(DESTDIR)/usr/bin/ unetlab-x-integration
+	install -m 644 -D -t $(DESTDIR)/usr/share/applications/ unetlab-x-integration.desktop
 	# build cache database of MIME types handled by desktop files
 	update-desktop-database -q || true
 
 uninstall:
-	-rm -f /usr/bin/unetlab-x-integration
-	-rm -f /usr/share/applications/unetlab-x-integration.desktop
+	-rm -f $(DESTDIR)/usr/bin/unetlab-x-integration
+	-rm -f $(DESTDIR)/usr/share/applications/unetlab-x-integration.desktop
 
 defaults:
 	xdg-mime default unetlab-x-integration.desktop x-scheme-handler/capture
