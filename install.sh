@@ -97,7 +97,7 @@ for dist_id in $ID $ID_LIKE; do
 		fedora)
 			verbose "Install dependencies..."
 			eval $SUDO dnf install -y ${PYTHON="python"} \
-				telnet vinagre wireshark-qt x11-openssh-askpass
+				telnet vinagre wireshark-qt x11-ssh-askpass
 			do_install
 			;;
 		opensuse|suse)
