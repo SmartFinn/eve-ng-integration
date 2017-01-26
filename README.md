@@ -4,7 +4,7 @@
 
 # UNetLab-X-Integration
 
-This repo contains the equivalent of [UNetLab Windows integration pack](http://www.unetlab.com/download/UNetLab-Win-Client-Pack.exe) for Ubuntu/Debian and other Linux distros.
+This repo contains the equivalent of UNetLab (aka EVE-NG) [Windows integration pack](http://www.unetlab.com/download/UNetLab-Win-Client-Pack.exe) for Ubuntu/Debian and other Linux distros.
 
 Currently supports the following URL schemes:
 
