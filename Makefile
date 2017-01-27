@@ -1,6 +1,6 @@
 BUILD_DIR := ./build
 
-all: install post-install
+all:
 
 install:
 	install -m 755 -D -t $(DESTDIR)/usr/bin/ unetlab-x-integration
@@ -14,7 +14,9 @@ uninstall:
 	-rm -f $(DESTDIR)/usr/bin/unetlab-x-integration
 	-rm -f $(DESTDIR)/usr/share/applications/unetlab-x-integration.desktop
 
-defaults: post-install
+defaults:
+	# setup as default handler for the next URL schemes (don't run it as root)
+	mkdir -p $(HOME)/.local/share/applications/
 	xdg-mime default unetlab-x-integration.desktop x-scheme-handler/capture
 	xdg-mime default unetlab-x-integration.desktop x-scheme-handler/telnet
 	xdg-mime default unetlab-x-integration.desktop x-scheme-handler/docker

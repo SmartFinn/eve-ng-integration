@@ -40,11 +40,11 @@ If your Linux distribution is not supported yet, don't give up, try [Manual inst
   tar -xzvf unetlab-x-integration.tar.gz
   ```
 
-2. Run `make install` as root
+2. Run `make install post-install` as root
 
   ```
   cd unetlab-x-integration/unetlab-x-integration-master
-  sudo make install
+  sudo make install post-install
   ```
 
 3. Install dependencies
