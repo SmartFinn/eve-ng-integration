@@ -25,7 +25,7 @@ wget -qO- https://raw.githubusercontent.com/SmartFinn/unetlab-x-integration/mast
 
 This method works on other Linux distros too. Tested on **Arch Linux**, **Manjaro**, **Fedora**, **openSUSE** and potentially works with other systems.
 
-If your Linux distribution is not supported yet, don't give up, try [Manual install](#manual-install) or create [new issue](https://github.com/SmartFinn/unetlab-x-integration/issues).
+If your Linux distribution is not supported yet, don't give up, try [Manual install](#manual-install) or [open a new issue](https://github.com/SmartFinn/unetlab-x-integration/issues/new).
 
 #### Manual install
 
@@ -58,8 +58,53 @@ If your Linux distribution is not supported yet, don't give up, try [Manual inst
 
 4. Enjoy!
 
-## Have a trouble?
+## Known issues
 
-If you have any issues or problems please post it on the issues tab.
+1. **Error `Couldn't run /usr/bin/dumpcap in child process: Permission denied` when starts Wireshark.**
+
+  Add your user to `wireshark` group:
+
+  ```
+  sudo usermod -a -G wireshark $USER
+  ```
+
+  If you use a Debian-like distro, you can run the next command and choose answer as `Yes`:
+
+  ```
+  sudo dpkg-reconfigure wireshark-common
+  ```
+
+  You will need to log out and then log back in again for this change to take effect.
+
+2. **Error `End of file on pipe magic during open` when starts Wireshark.**
+
+  Install `ssh-askpass` package for your distro, or setup SSH key-based authentication with UNetLab (EVE-NG) machine.
+
+3. **Click on a node does not open an app (opens another app) in all browsers.**
+
+  Set the `unetlab-x-integration.desktop` as default handler for telnet, capture and docker URL schemes:
+
+  ```bash
+  mkdir -p ~/.local/share/applications/
+  xdg-mime default unetlab-x-integration.desktop x-scheme-handler/capture
+  xdg-mime default unetlab-x-integration.desktop x-scheme-handler/telnet
+  xdg-mime default unetlab-x-integration.desktop x-scheme-handler/docker
+  ```
+
+4. **Does not work in Google Chrome but works in another browser.**
+
+  Quit Chrome and reset protocol handler with the command:
+
+  ```bash
+  sed -i.orig 's/"\(telnet\|capture\|docker\)":\(true\|false\),\?//g' "$HOME/.config/google-chrome/Local State"
+  ```
+
+  **NOTE**: Path to the `Local State` file will be different for Chromium and other Chromium-based browsers.
+
+5. **Does not work in Firefox but works in another browser.**
+
+  Go to `Preferences → Applications` (or paste `about:preferences#applications` in your address bar) and change Action to `Always ask` for telnet, capture and docker Content Types.
+
+If your problem hasn't been solved or reported, please [open a new issue](https://github.com/SmartFinn/unetlab-x-integration/issues).
 
 English, Russian and Ukrainian are welcomed.
