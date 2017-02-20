@@ -1,11 +1,11 @@
 #!/bin/sh
 #
 # This script is meant for quick & easy install via:
-#   'curl -sSL https://raw.github.com/SmartFinn/unetlab-x-integration/master/install.sh | sudo sh'
+#   'curl -sSL https://raw.githubusercontent.com/SmartFinn/unetlab-x-integration/master/install.sh | sh'
 # or:
-#   'wget -qO- https://raw.github.com/SmartFinn/unetlab-x-integration/master/install.sh | sudo sh'
+#   'wget -qO- https://raw.githubusercontent.com/SmartFinn/unetlab-x-integration/master/install.sh | sh'
 
-set -e
+set -eo pipefail
 
 URL="https://github.com/SmartFinn/unetlab-x-integration/archive/master.tar.gz"
 
@@ -19,10 +19,10 @@ die() { echo "$@" >&2; exit 1; }
 is_unsupported() {
 	cat <<-'EOF' >&2
 
-		Your Linux distribution is not supported.
+	Your Linux distribution is not supported.
 
-		Feel free to ask support for it by opening an issue at:
-		  https://github.com/SmartFinn/unetlab-x-integration/issues
+	Feel free to ask support for it by opening an issue at:
+	  https://github.com/SmartFinn/unetlab-x-integration/issues
 
 	EOF
 	exit 1
@@ -39,8 +39,8 @@ do_install() {
 	fi
 
 	verbose "Installing..."
-	eval $SUDO install -m 755 "$temp_dir"/unetlab-x-integration /usr/bin/
-	eval $SUDO install -m 644 "$temp_dir"/unetlab-x-integration.desktop \
+	eval $SUDO install -m 755 -D "$temp_dir"/unetlab-x-integration /usr/bin/
+	eval $SUDO install -m 644 -D "$temp_dir"/unetlab-x-integration.desktop \
 		/usr/share/applications/
 
 	eval $SUDO update-desktop-database -q || true
@@ -54,11 +54,11 @@ do_install() {
 
 	cat <<-'EOF'
 
-		  Do not forget add the user to the wireshark group:
+	  Do not forget add the user to the wireshark group:
 
-		    # You will need to log out and then log back in
-		    # again for this change to take effect.
-		    sudo usermod -a -G wireshark $USER
+	    # You will need to log out and then log back in
+	    # again for this change to take effect.
+	    sudo usermod -a -G wireshark $USER
 
 	EOF
 
