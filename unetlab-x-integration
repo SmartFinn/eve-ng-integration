@@ -11,7 +11,7 @@ import sys
 class Terminal(object):
     def __init__(self):
         self.current_desktop = os.getenv('XDG_CURRENT_DESKTOP')
-        self.override_terminal = os.getenv('TERMINAL')
+        self.override_terminal = os.getenv('OVERRIDE_TERMINAL_CMD')
 
     def _is_command(self, command):
         for path in os.getenv('PATH', '').split(':'):
@@ -30,7 +30,7 @@ class Terminal(object):
 
     def _terminal_emulator_cmd(self):
         if self.override_terminal:
-            return [self.override_terminal, '-e']
+            return self.override_terminal.split()
         elif self._is_command('x-terminal-emulator'):
             return ['x-terminal-emulator', '-e']
         elif self._current_desktop('cinnamon', 'gnome', 'unity'):
