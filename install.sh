@@ -5,7 +5,7 @@
 # or:
 #   'wget -qO- https://raw.githubusercontent.com/SmartFinn/unetlab-x-integration/master/install.sh | sh'
 
-set -eo pipefail
+set -e
 
 URL="https://github.com/SmartFinn/unetlab-x-integration/archive/master.tar.gz"
 
