@@ -4,7 +4,7 @@
 
 # UNetLab-X-Integration
 
-This repo contains the equivalent of UNetLab (aka EVE-NG) [Windows integration pack](http://www.unetlab.com/download/UNetLab-Win-Client-Pack.exe) for Ubuntu/Debian and other Linux distros.
+This repo contains the equivalent of EVE-NG (aka UNetLab) [Windows integration pack](http://www.unetlab.com/download/UNetLab-Win-Client-Pack.exe) for Ubuntu/Debian and other Linux distros.
 
 Currently supports the following URL schemes:
 
@@ -78,7 +78,7 @@ If your Linux distribution is not supported yet, don't give up, try [Manual inst
 
 2. #### Error `End of file on pipe magic during open` when starts Wireshark
 
-  Install `ssh-askpass` package for your distro, or setup SSH key-based authentication with UNetLab (EVE-NG) machine.
+  Install `ssh-askpass` package for your distro, or setup SSH key-based authentication with EVE-NG (UNetLab) machine.
 
 3. #### Click on a node does not open an app (opens another app) in all browsers
 
