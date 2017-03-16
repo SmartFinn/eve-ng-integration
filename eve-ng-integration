@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# See https://github.com/SmartFinn/unetlab-x-integration/
+# See https://github.com/SmartFinn/eve-ng-integration
 
 from __future__ import print_function
 from subprocess import Popen, PIPE

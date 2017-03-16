@@ -1,13 +1,13 @@
 #!/bin/sh
 #
 # This script is meant for quick & easy install via:
-#   'curl -sSL https://raw.githubusercontent.com/SmartFinn/unetlab-x-integration/master/install.sh | sh'
+#   'curl -sSL https://raw.githubusercontent.com/SmartFinn/eve-ng-integration/master/install.sh | sh'
 # or:
-#   'wget -qO- https://raw.githubusercontent.com/SmartFinn/unetlab-x-integration/master/install.sh | sh'
+#   'wget -qO- https://raw.githubusercontent.com/SmartFinn/eve-ng-integration/master/install.sh | sh'
 
 set -e
 
-URL="https://github.com/SmartFinn/unetlab-x-integration/archive/master.tar.gz"
+URL="https://github.com/SmartFinn/eve-ng-integration/archive/master.tar.gz"
 
 # add sudo if user is not root
 [ "$(whoami)" = root ] || SUDO="sudo"
@@ -22,7 +22,7 @@ is_unsupported() {
 	Your Linux distribution is not supported.
 
 	Feel free to ask support for it by opening an issue at:
-	  https://github.com/SmartFinn/unetlab-x-integration/issues
+	  https://github.com/SmartFinn/eve-ng-integration/issues
 
 	EOF
 	exit 1
@@ -39,8 +39,8 @@ do_install() {
 	fi
 
 	verbose "Installing..."
-	eval $SUDO install -m 755 -D "$temp_dir"/unetlab-x-integration /usr/bin/
-	eval $SUDO install -m 644 -D "$temp_dir"/unetlab-x-integration.desktop \
+	eval $SUDO install -m 755 -D "$temp_dir"/eve-ng-integration /usr/bin/
+	eval $SUDO install -m 644 -D "$temp_dir"/eve-ng-integration.desktop \
 		/usr/share/applications/
 
 	eval $SUDO update-desktop-database -q || true

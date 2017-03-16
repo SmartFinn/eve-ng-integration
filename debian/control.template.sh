@@ -13,8 +13,8 @@ if [ -f "$CONTROL" ]; then
 fi
 
 cat <<-EOF > "$CONTROL"
-Package: unetlab-x-integration
-Priority: extra
+Package: eve-ng-integration
+Priority: optional
 Section: net
 Maintainer: Sergei Eremenko <finalitik@gmail.com>
 Architecture: all
@@ -22,8 +22,9 @@ Version: ${VERSION}
 Installed-Size: ${SIZE}
 Depends: python, ssh-askpass-gnome | ssh-askpass, telnet, vinagre, wireshark, xterm | x-terminal-emulator
 Suggests: docker-engine | docker.io
-Homepage: http://github.com/smartfinn/unetlab-x-integration/
-Description: URL handler for telnet://, capture:// and docker:// URIs
+Replaces: unetlab-x-integration
+Homepage: http://github.com/smartfinn/eve-ng-integration
+Description: EVE-NG (desktop integration)
  This package provides URL handler for the following URL schemes:
   * telnet://
   * capture://

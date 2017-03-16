@@ -3,23 +3,23 @@ BUILD_DIR := ./build
 all:
 
 install:
-	install -m 755 -D -t $(DESTDIR)/usr/bin/ unetlab-x-integration
-	install -m 644 -D -t $(DESTDIR)/usr/share/applications/ unetlab-x-integration.desktop
+	install -m 755 -D -t $(DESTDIR)/usr/bin/ eve-ng-integration
+	install -m 644 -D -t $(DESTDIR)/usr/share/applications/ eve-ng-integration.desktop
 
 post-install:
 	# build cache database of MIME types handled by desktop files
 	update-desktop-database -q || true
 
 uninstall:
-	-rm -f $(DESTDIR)/usr/bin/unetlab-x-integration
-	-rm -f $(DESTDIR)/usr/share/applications/unetlab-x-integration.desktop
+	-rm -f $(DESTDIR)/usr/bin/eve-ng-integration
+	-rm -f $(DESTDIR)/usr/share/applications/eve-ng-integration.desktop
 
 defaults:
 	# setup as default handler for the next URL schemes (don't run it as root)
 	mkdir -p $(HOME)/.local/share/applications/
-	xdg-mime default unetlab-x-integration.desktop x-scheme-handler/capture
-	xdg-mime default unetlab-x-integration.desktop x-scheme-handler/telnet
-	xdg-mime default unetlab-x-integration.desktop x-scheme-handler/docker
+	xdg-mime default eve-ng-integration.desktop x-scheme-handler/capture
+	xdg-mime default eve-ng-integration.desktop x-scheme-handler/telnet
+	xdg-mime default eve-ng-integration.desktop x-scheme-handler/docker
 
 prepare_deb: clean
 	$(MAKE) install DESTDIR=$(BUILD_DIR)
