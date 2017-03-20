@@ -1,8 +1,4 @@
-[![releases](https://img.shields.io/github/release/smartfinn/eve-ng-integration.svg)](https://github.com/SmartFinn/eve-ng-integration/releases)
-[![issues-closed](https://img.shields.io/github/issues-closed/smartfinn/eve-ng-integration.svg)](https://github.com/SmartFinn/eve-ng-integration/issues?q=is%3Aissue+is%3Aclosed)
-[![issues-pr-closed](https://img.shields.io/github/issues-pr-closed/smartfinn/eve-ng-integration.svg)](https://github.com/SmartFinn/eve-ng-integration/pulls?q=is%3Apr+is%3Aclosed)
-
-# EVE-NG Integration
+# EVE-NG Integration [![releases](https://img.shields.io/github/release/smartfinn/eve-ng-integration.svg)](https://github.com/SmartFinn/eve-ng-integration/releases)
 
 This repo contains the equivalent of EVE-NG (aka UNetLab) [Windows integration pack](http://www.unetlab.com/download/UNetLab-Win-Client-Pack.exe) for Ubuntu/Debian and other Linux distros.
 
@@ -12,6 +8,10 @@ Currently supports the following URL schemes:
 * `capture://`
 * `docker://`
 * `vnc://` _(via Vinagre)_
+
+## Demo
+
+![Demo](demo.gif)
 
 ## Installation
 
