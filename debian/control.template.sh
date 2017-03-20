@@ -23,8 +23,10 @@ Installed-Size: ${SIZE}
 Depends: python, ssh-askpass-gnome | ssh-askpass, telnet, vinagre, wireshark, xterm | x-terminal-emulator
 Suggests: docker-engine | docker.io
 Replaces: unetlab-x-integration
+Conflicts: unetlab-x-integration
 Homepage: http://github.com/smartfinn/eve-ng-integration
-Description: EVE-NG (desktop integration)
+Bugs: http://github.com/smartfinn/eve-ng-integration/issues
+Description: integrates EVE-NG (aka UNetLab) with Linux desktop
  This package provides URL handler for the following URL schemes:
   * telnet://
   * capture://
