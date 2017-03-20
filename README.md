@@ -1,6 +1,6 @@
 # EVE-NG Integration [![releases](https://img.shields.io/github/release/smartfinn/eve-ng-integration.svg)](https://github.com/SmartFinn/eve-ng-integration/releases)
 
-This repo contains the equivalent of EVE-NG (aka UNetLab) [Windows Client Side](http://www.eve-ng.net/index.php/downloads/windows-client-side-pack) for Ubuntu/Debian and other Linux distros.
+This repo contains the equivalent of EVE-NG (aka UNetLab) [Windows Client Side Pack](http://www.eve-ng.net/index.php/downloads/windows-client-side-pack) for Ubuntu/Debian and other Linux distros.
 
 Currently supports the following URL schemes:
 
