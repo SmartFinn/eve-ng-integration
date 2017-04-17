@@ -34,17 +34,17 @@ class Terminal(object):
         elif self._is_command('x-terminal-emulator'):
             return ['x-terminal-emulator', '-e']
         elif self._current_desktop('cinnamon', 'gnome', 'unity'):
-            return ['gnome-terminal', '-x']
+            return ['gnome-terminal', '-e']
         elif self._current_desktop('kde'):
             return ['konsole', '-e']
         elif self._current_desktop('lxde', 'lxqt'):
             return ['lxterminal', '-e']
         elif self._current_desktop('mate'):
-            return ['mate-terminal', '-x']
+            return ['mate-terminal', '-e']
         elif self._current_desktop('pantheon'):
             return ['pantheon-terminal', '-e']
         elif self._current_desktop('xfce'):
-            return ['xfce4-terminal', '-x']
+            return ['xfce4-terminal', '-e']
         elif self._is_command('urxvt'):
             return ['urxvt', '-e']
         else:
@@ -52,7 +52,7 @@ class Terminal(object):
 
     def execute(self, command):
         if isinstance(command, (str)):
-            command = command.split()
+            command = command.split('\n')
 
         term = self._terminal_emulator_cmd()
 
