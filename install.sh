@@ -68,6 +68,9 @@ do_install() {
 # Detect Linux distribution
 if [ -r /etc/os-release ]; then
 	. /etc/os-release
+elif command_exists lsb_release; then
+	ID=$(lsb_release -si)
+	VERSION_ID=$(lsb_release -sr)
 else
 	is_unsupported
 fi
@@ -97,13 +100,19 @@ for dist_id in $ID $ID_LIKE; do
 		fedora)
 			verbose "Install dependencies..."
 			eval $SUDO dnf install -y ${PYTHON="python"} \
-				telnet vinagre wireshark-qt openssh-askpass
+				openssh-askpass telnet vinagre wireshark-qt
 			do_install
 			;;
 		opensuse|suse)
 			verbose "Install dependencies..."
 			eval $SUDO zypper install -y ${PYTHON="python"} \
 				openssh-askpass telnet vinagre wireshark-ui-qt
+			do_install
+			;;
+		centos|CentOS|rhel)
+			verbose "Install dependencies..."
+			eval $SUDO yum install -y ${PYTHON="python"} \
+				openssh-askpass telnet vinagre wireshark-gnome
 			do_install
 			;;
 		*)
