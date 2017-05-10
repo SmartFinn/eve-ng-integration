@@ -87,7 +87,7 @@ def main(argv):
 
         term.execute(cmd)
     elif url.scheme == 'telnet':
-        cmd = 'telnet {host} {port}'.format(**data)
+        cmd = ['telnet', '{host}'.format(**data), '{port}'.format(**data)]
 
         term.execute(cmd)
     else:
