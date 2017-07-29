@@ -99,7 +99,7 @@ If your Linux distribution is not supported yet, don't give up, try [Manual inst
   sed -i.orig 's/"\(telnet\|capture\|docker\)":\(true\|false\),\?//g' "$HOME/.config/google-chrome/Default/Preferences"
   ```
 
-  **NOTE**: Path to the `Local State` file will be different for Chromium and other Chromium-based browsers.
+  **NOTE**: Path to the `Preferences` file will be different for Chromium and other Chromium-based browsers.
 
 5. #### Does not work in Firefox but works in another browser
 
