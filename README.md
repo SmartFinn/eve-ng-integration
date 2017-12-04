@@ -105,6 +105,14 @@ If your Linux distribution is not supported yet, don't give up, try [Manual inst
 
   Go to `Preferences → Applications` (or paste `about:preferences#applications` in your address bar) and change Action to `Always ask` for telnet, capture and docker Content Types.
 
+6. #### Firefox says `The address wasn't understood` when you clicked on a device
+
+  - Type `about:config` into the Location Bar (address bar) and press Enter.
+  - Right-click → New → Boolean → Name: `network.protocol-handler.expose.telnet` → Value → `false` (Repeat this for each supported protocol)
+  - Next time you click a link of protocol-type foo you will be asked which application to open it with.
+
+  See also [http://kb.mozillazine.org/Register_protocol](http://kb.mozillazine.org/Register_protocol#Firefox_3.5_and_above)
+
 If your problem hasn't been solved or reported, please [open a new issue](https://github.com/SmartFinn/eve-ng-integration/issues).
 
 English, Russian and Ukrainian are welcomed.
