@@ -79,7 +79,7 @@ def main(argv):
               -l root {host} tcpdump -i {path} -n -s 0 -U -w -'.format(**data)
         wireshark_cmd = 'wireshark -k -i -'
 
-        tcpdump = Popen(cmd.split(), stdout=PIPE)
+        tcpdump = Popen(cmd.split(), stdout=PIPE, preexec_fn=os.setsid)
         wireshark = Popen(wireshark_cmd.split(), stdin=tcpdump.stdout)
         wireshark.communicate()
     elif url.scheme == 'docker':
