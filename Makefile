@@ -1,5 +1,3 @@
-BUILD_DIR := ./build
-
 all:
 
 install:
@@ -36,25 +34,6 @@ defaults:
 	xdg-mime default eve-ng-integration.desktop x-scheme-handler/docker
 	xdg-mime default eni-rdp-wrapper.desktop application/x-rdp
 
-prepare_deb: clean
-	$(MAKE) install DESTDIR=$(BUILD_DIR)
-	install -m 755 -D -t $(BUILD_DIR)/DEBIAN/ debian/postinst
-	install -m 755 -D -t $(BUILD_DIR)/DEBIAN/ debian/postrm
-	# generate DEBIAN/control
-	BUILD_DIR="$(BUILD_DIR)" sh debian/control.template.sh
-
-deb: prepare_deb
-	$(eval PKG_FILENAME := $(shell awk ' \
-		/^Package:/      {name=$$2} \
-		/^Version:/      {vers=$$2} \
-		/^Architecture:/ {arch=$$2} \
-		END {print name "_" vers "_" arch}' "$(BUILD_DIR)/DEBIAN/control"))
-	fakeroot dpkg-deb --build "$(BUILD_DIR)" "$(PKG_FILENAME).deb"
-
-clean:
-	-rm -rf "$(BUILD_DIR)"
-	-rm -f *.deb
-
 check_release:
 ifndef TAG
 	$(error TAG is not defined. Pass via "make release TAG=v0.1.2")
@@ -64,7 +43,5 @@ release: check_release
 	git tag -f $(TAG)
 	git push origin master
 	git push origin --tags
-	$(MAKE) deb
 
-.PHONY: all install post-install uninstall defaults prepare_deb deb clean \
-	check_release release
+.PHONY: all install post-install uninstall defaults check_release release
