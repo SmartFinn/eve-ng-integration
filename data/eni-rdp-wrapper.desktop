@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=RDP Wrapper (EVE-NG Integration)
+Exec=eni-rdp-wrapper %f
+TryExec=eni-rdp-wrapper
+Type=Application
+Categories=Network;
+MimeType=application/x-rdp
+NoDisplay=true

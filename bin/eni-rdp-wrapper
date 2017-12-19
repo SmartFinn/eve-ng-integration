@@ -1,0 +1,16 @@
+#!/bin/sh
+# This file a part of the eve-ng-integration package
+
+RDP_FILE="$1"
+
+get_full_address() {
+	sed -n 's/full address:s://p' "$1"
+}
+
+full_address="$(get_full_address "$RDP_FILE")"
+
+if command -v vinagre >/dev/null; then
+	vinagre "rdp://$full_address"
+else
+	xfreerdp /v:"$full_address" /cert-ignore /sec:rdp
+fi
