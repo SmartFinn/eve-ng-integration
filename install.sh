@@ -7,16 +7,12 @@
 
 set -e
 
-URL="https://github.com/SmartFinn/eve-ng-integration/archive/master.tar.gz"
+url="https://github.com/SmartFinn/eve-ng-integration/archive/master.tar.gz"
 
-# add sudo if user is not root
-[ "$(whoami)" = root ] || SUDO="sudo"
+_command_exists() { command -v "$@" > /dev/null 2>&1; }
+_msg() { echo "=>" "$@" >&2; }
 
-command_exists() { command -v "$@" > /dev/null 2>&1; }
-verbose() { echo "=>" "$@"; }
-die() { echo "$@" >&2; exit 1; }
-
-is_unsupported() {
+_unsupported() {
 	cat <<-'EOF' >&2
 
 	Your Linux distribution is not supported.
@@ -28,31 +24,43 @@ is_unsupported() {
 	exit 1
 }
 
-do_install() {
-	temp_dir=$(mktemp -d)
-
-	verbose "Download and extract into '$temp_dir'..."
-	if command_exists wget; then
-		wget -qO- "$URL" | tar --strip-components=1 -C "$temp_dir" -xzf -
+_get_file() {
+	if _command_exists wget; then
+		wget -qO- "$1"
 	else
-		curl -sL "$URL" | tar --strip-components=1 -C "$temp_dir" -xzf -
+		curl -sLo- "$1"
 	fi
+}
 
-	verbose "Installing..."
-	eval $SUDO install -m 755 -D "$temp_dir"/eve-ng-integration /usr/bin/
-	eval $SUDO install -m 644 -D "$temp_dir"/eve-ng-integration.desktop \
+do_install() {
+	temp_dir="$(mktemp -d)"
+
+	_msg "Download and extract into '$temp_dir'..."
+	_get_file "$url" | tar --strip-components=1 -C "$temp_dir" -xzf -
+
+	_msg "Installing..."
+	sudo mkdir -p /usr/bin
+	sudo install -m 755 "$temp_dir/bin/eve-ng-integration" /usr/bin/
+	sudo install -m 755 "$temp_dir/bin/eni-rdp-wrapper" /usr/bin/
+	sudo mkdir -p /usr/share/applications
+	sudo install -m 644 "$temp_dir/data/eve-ng-integration.desktop" \
 		/usr/share/applications/
+	sudo install -m 644 "$temp_dir/data/eni-rdp-wrapper.desktop" \
+		/usr/share/applications/
+	sudo mkdir -p /usr/share/mime/packages
+	sudo install -m 644 '$temp_dir/data/eni-rdp-wrapper.xml' \
+		/usr/share/mime/packages/
 
-	eval $SUDO update-desktop-database -q || true
+	# build cache database of MIME types handled by desktop files
+	sudo update-desktop-database -q || true
+	sudo update-mime-database -n /usr/share/mime || true
 
-	verbose "Remove '$temp_dir'..."
-	if [ -d "$temp_dir" ]; then
-		rm -rf "$temp_dir"
-	fi
+	_msg "Clearing cache ..."
+	rm -rf "$temp_dir"
 
-	verbose "Complete!"
+	_msg "Complete!"
 
-	cat <<-'EOF'
+	cat <<-'EOF' >&2
 
 	  Do not forget add the user to the wireshark group:
 
@@ -68,50 +76,50 @@ do_install() {
 # Detect Linux distribution
 if [ -r /etc/os-release ]; then
 	. /etc/os-release
-elif command_exists lsb_release; then
+elif _command_exists lsb_release; then
 	ID=$(lsb_release -si)
 	VERSION_ID=$(lsb_release -sr)
 else
-	is_unsupported
+	_unsupported
 fi
 
-verbose "Detected distribution: $ID $VERSION_ID (${ID_LIKE:-"none"})"
+_msg "Detected distribution: $ID $VERSION_ID (${ID_LIKE:-"none"})"
 
 # Check if python is installed
-if command_exists python; then
-	# create variable
+if _command_exists python; then
+	# declare a variable
 	PYTHON=""
 fi
 
 for dist_id in $ID $ID_LIKE; do
 	case "$dist_id" in
 		debian|ubuntu)
-			verbose "Install dependencies..."
-			eval $SUDO apt-get install -y ${PYTHON="python"} \
+			_msg "Install dependencies..."
+			sudo apt-get install -y ${PYTHON-"python"} \
 				ssh-askpass telnet vinagre wireshark
 			do_install
 			;;
 		arch|archlinux|manjaro)
-			verbose "Install dependencies..."
-			eval $SUDO pacman -S ${PYTHON="python"} \
+			_msg "Install dependencies..."
+			sudo pacman -S ${PYTHON-"python"} \
 				inetutils vinagre wireshark-qt x11-ssh-askpass
 			do_install
 			;;
 		fedora)
-			verbose "Install dependencies..."
-			eval $SUDO dnf install -y ${PYTHON="python"} \
+			_msg "Install dependencies..."
+			sudo dnf install -y ${PYTHON-"python"} \
 				openssh-askpass telnet vinagre wireshark-qt
 			do_install
 			;;
 		opensuse|suse)
-			verbose "Install dependencies..."
-			eval $SUDO zypper install -y ${PYTHON="python"} \
+			_msg "Install dependencies..."
+			sudo zypper install -y ${PYTHON-"python"} \
 				openssh-askpass telnet vinagre wireshark-ui-qt
 			do_install
 			;;
 		centos|CentOS|rhel)
-			verbose "Install dependencies..."
-			eval $SUDO yum install -y ${PYTHON="python"} \
+			_msg "Install dependencies..."
+			sudo yum install -y ${PYTHON-"python"} \
 				openssh-askpass telnet vinagre wireshark-gnome
 			do_install
 			;;
@@ -121,4 +129,4 @@ for dist_id in $ID $ID_LIKE; do
 	esac
 done
 
-is_unsupported
+_unsupported
