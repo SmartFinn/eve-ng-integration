@@ -1,0 +1,8 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: eve-ng-integration
+Source: https://github.com/SmartFinn/eve-ng-integration
+
+Files: *
+Copyright: 2017 Sergei Eremenko <finalitik@gmail.com>
+License: MIT
+ See /usr/share/doc/papirus-folders/LICENSE for a full copy of the license.
