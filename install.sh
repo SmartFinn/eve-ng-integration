@@ -48,7 +48,7 @@ do_install() {
 	sudo install -m 644 "$temp_dir/data/eni-rdp-wrapper.desktop" \
 		/usr/share/applications/
 	sudo mkdir -p /usr/share/mime/packages
-	sudo install -m 644 '$temp_dir/data/eni-rdp-wrapper.xml' \
+	sudo install -m 644 "$temp_dir/data/eni-rdp-wrapper.xml" \
 		/usr/share/mime/packages/
 
 	# build cache database of MIME types handled by desktop files
