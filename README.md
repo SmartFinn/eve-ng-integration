@@ -85,7 +85,7 @@ Packages in this section are not part of the official repositories. If you have 
 
 ## Known issues
 
-1. #### Error `Couldn't run /usr/bin/dumpcap in child process: Permission denied` when starts Wireshark
+1. #### Error `Couldn't run /usr/bin/dumpcap in child process: Permission denied` when starting Wireshark
 
     Add your user to `wireshark` group:
 
@@ -101,13 +101,13 @@ Packages in this section are not part of the official repositories. If you have 
 
     You will need to log out and then log back in again for this change to take effect.
 
-2. #### Error `End of file on pipe magic during open` when starts Wireshark
+2. #### Error `End of file on pipe magic during open` when starting Wireshark
 
     Install `ssh-askpass` package for your distro, or setup SSH key-based authentication with EVE-NG (UNetLab) machine.
 
 3. #### Click on a node does not open an app (opens another app) in all browsers
 
-    Set the `eve-ng-integration.desktop` as default handler for telnet, capture and docker URL schemes:
+    Execute the following commands to set the `eve-ng-integration.desktop` as default handler for telnet, capture, and docker URL schemes:
 
     ```bash
     mkdir -p ~/.local/share/applications/
@@ -131,7 +131,7 @@ Packages in this section are not part of the official repositories. If you have 
 
     Go to `Preferences → Applications` (or paste `about:preferences#applications` in your address bar) and change Action to `Always ask` for telnet, capture and docker Content Types.
 
-6. #### Firefox says `The address wasn't understood` when you clicked on a device
+6. #### Firefox says `The address wasn't understood` when you clicked on a node
 
     - Type `about:config` into the Location Bar (address bar) and press Enter.
     - Right-click → New → Boolean → Name: `network.protocol-handler.expose.telnet` → Value → `false` (Repeat this for each supported protocol)
