@@ -4,8 +4,7 @@
 from __future__ import print_function
 from subprocess import Popen, PIPE
 
-import os
-import sys
+import os, sys, time
 
 
 class Terminal(object):
@@ -82,14 +81,24 @@ def main(argv):
         tcpdump = Popen(cmd.split(), stdout=PIPE, preexec_fn=os.setsid)
         wireshark = Popen(wireshark_cmd.split(), stdin=tcpdump.stdout)
         wireshark.communicate()
+
     elif url.scheme == 'docker':
         cmd = 'docker -H {host}:{port} attach {path}'.format(**data)
-
         term.execute(cmd)
+
     elif url.scheme == 'telnet':
-        cmd = 'telnet {host} {port}'.format(**data)
-
+        cmd = 'sh -ic "ssh -f -o ExitOnForwardFailure=yes -L {port}:localhost:{port} {host} sleep 10; telnet localhost {port}; exec bash"'.format(**data)
         term.execute(cmd)
+
+    elif url.scheme == 'vnc':
+        cmd = 'ssh -f -o ExitOnForwardFailure=yes -L {port}:localhost:{port} {host} sleep 15'.format(**data)
+        term.execute(cmd)
+
+        # With SSH key-based authentication it connects immediately
+        time.sleep( 1 )
+
+        Popen('vinagre localhost:{port}'.format(**data).split())
+
     else:
         return '{}: The protocol {} is not supported.'.format(url.geturl(),
                                                               url.scheme)
