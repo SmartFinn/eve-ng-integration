@@ -32,6 +32,7 @@ defaults:
 	xdg-mime default eve-ng-integration.desktop x-scheme-handler/capture
 	xdg-mime default eve-ng-integration.desktop x-scheme-handler/telnet
 	xdg-mime default eve-ng-integration.desktop x-scheme-handler/docker
+	xdg-mime default eve-ng-integration.desktop x-scheme-handler/vnc
 	xdg-mime default eni-rdp-wrapper.desktop application/x-rdp
 
 check_release:
