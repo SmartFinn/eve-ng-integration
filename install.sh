@@ -106,9 +106,14 @@ for dist_id in $ID $ID_LIKE; do
 			do_install
 			;;
 		fedora)
+			if [ "${VERSION_ID}" -ge '29' ] ; then
+				wireshark_packagename='wireshark'
+			else
+				wireshark_packagename='wireshark-qt'
+			fi
 			_msg "Install dependencies..."
 			sudo dnf install -y ${PYTHON-"python"} \
-				openssh-askpass telnet vinagre wireshark-qt
+				openssh-askpass telnet vinagre "${wireshark_packagename}"
 			do_install
 			;;
 		opensuse|suse)
