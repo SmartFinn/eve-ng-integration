@@ -47,6 +47,8 @@ class Terminal(object):
             return ['xfce4-terminal', '-e']
         elif self._is_command('urxvt'):
             return ['urxvt', '-e']
+        elif self._is_command('st'):
+            return ['st', '-e']
         else:
             return ['xterm', '-e']
 
