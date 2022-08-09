@@ -68,7 +68,7 @@ Packages in this section are not part of the official repositories. If you have 
 2. Run `make install` as root
 
   ```
-  cd eve-ng-integration/eve-ng-integration-master
+  cd eve-ng-integration/
   sudo make install
   ```
 
