@@ -10,7 +10,7 @@ Bugs: https://github.com/SmartFinn/eve-ng-integration/issues
 Package: eve-ng-integration
 Architecture: all
 Multi-Arch: foreign
-Depends: ${misc:Depends}, python, ssh-askpass-gnome | ssh-askpass, telnet, vinagre, wireshark, xterm | x-terminal-emulator
+Depends: ${misc:Depends}, python3, ssh-askpass-gnome | ssh-askpass, telnet, vinagre, wireshark, xterm | x-terminal-emulator
 Suggests: docker-ce | docker.io
 Replaces: unetlab-x-integration
 Conflicts: unetlab-x-integration

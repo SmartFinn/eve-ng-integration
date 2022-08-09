@@ -86,7 +86,7 @@ fi
 _msg "Detected distribution: $ID $VERSION_ID (${ID_LIKE:-"none"})"
 
 # Check if python is installed
-if _command_exists python; then
+if _command_exists python3; then
 	# declare a variable
 	PYTHON=""
 fi
@@ -95,13 +95,13 @@ for dist_id in $ID $ID_LIKE; do
 	case "$dist_id" in
 		debian|ubuntu)
 			_msg "Install dependencies..."
-			sudo apt-get install -y ${PYTHON-"python"} \
+			sudo apt-get install -y ${PYTHON-"python3"} \
 				ssh-askpass telnet vinagre wireshark
 			do_install
 			;;
 		arch|archlinux|manjaro)
 			_msg "Install dependencies..."
-			sudo pacman -S ${PYTHON-"python"} \
+			sudo pacman -S ${PYTHON-"python3"} \
 				inetutils vinagre wireshark-qt x11-ssh-askpass
 			do_install
 			;;
@@ -112,19 +112,19 @@ for dist_id in $ID $ID_LIKE; do
 				wireshark_packagename='wireshark-qt'
 			fi
 			_msg "Install dependencies..."
-			sudo dnf install -y ${PYTHON-"python"} \
+			sudo dnf install -y ${PYTHON-"python3"} \
 				openssh-askpass telnet vinagre "${wireshark_packagename}"
 			do_install
 			;;
 		opensuse|suse)
 			_msg "Install dependencies..."
-			sudo zypper install -y ${PYTHON-"python"} \
+			sudo zypper install -y ${PYTHON-"python3"} \
 				openssh-askpass telnet vinagre wireshark-ui-qt
 			do_install
 			;;
 		centos|CentOS|rhel)
 			_msg "Install dependencies..."
-			sudo yum install -y ${PYTHON-"python"} \
+			sudo yum install -y ${PYTHON-"python3"} \
 				openssh-askpass telnet vinagre wireshark-gnome
 			do_install
 			;;

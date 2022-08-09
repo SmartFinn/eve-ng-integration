@@ -74,12 +74,12 @@ Packages in this section are not part of the official repositories. If you have 
 
 3. Install dependencies
 
-  * `python` >= 2.7 _(required)_
+  * `python3` _(required)_
   * `telnet` _(required)_
   * `wireshark` _(recommended)_
   * `ssh-askpass` _(recommended)_
   * `vinagre` _(recommended)_
-  * `docker-engine` _(optional)_
+  * `docker` _(optional)_
 
 4. Enjoy!
 
