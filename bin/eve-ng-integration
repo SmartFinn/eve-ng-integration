@@ -75,13 +75,17 @@ def main(argv):
     }
 
     if url.scheme == 'capture':
-        cmd = 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \
-              -l root {host} tcpdump -i {path} -n -s 0 -U -w -'.format(**data)
-        wireshark_cmd = 'wireshark -k -i -'
+        if data["host"] in ['127.0.0.1', 'localhost', '::1']:
+            wireshark_cmd = 'wireshark -k -i {path}'.format(**data)
+            Popen(wireshark_cmd.split())
+        else:
+            cmd = 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \
+                -l root {host} tcpdump -i {path} -n -s 0 -U -w -'.format(**data)
+            wireshark_cmd = 'wireshark -k -i -'
 
-        tcpdump = Popen(cmd.split(), stdout=PIPE, preexec_fn=os.setsid)
-        wireshark = Popen(wireshark_cmd.split(), stdin=tcpdump.stdout)
-        wireshark.communicate()
+            tcpdump = Popen(cmd.split(), stdout=PIPE, preexec_fn=os.setsid)
+            wireshark = Popen(wireshark_cmd.split(), stdin=tcpdump.stdout)
+            wireshark.communicate()
     elif url.scheme == 'docker':
         cmd = 'docker -H {host}:{port} attach {path}'.format(**data)
 
