@@ -75,7 +75,7 @@ def main(argv):
     }
 
     if url.scheme == 'capture':
-        if data["host"] in ['127.0.0.1', 'localhost', '::1']:
+        if data["host"] in ['127.0.0.1', 'localhost', '::1', '[::1]']:
             wireshark_cmd = 'wireshark -k -i {path}'.format(**data)
             Popen(wireshark_cmd.split())
         else:
