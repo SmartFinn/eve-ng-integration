@@ -47,7 +47,6 @@ Packages in this section are not part of the official repositories. If you have 
 
 | **Distro** | **Maintainer**  | **Package**                              |
 | :--------- | :-------------- | :--------------------------------------- |
-| Arch Linux | Aleksandr Boiko | [eve-ng-integration-git](https://aur.archlinux.org/packages/eve-ng-integration-git) <sup>AUR</sup> |
 | Arch Linux | Konstantin Shalygin | [eve-ng-integration](https://aur.archlinux.org/packages/eve-ng-integration) <sup>AUR</sup> |
 
 **NOTE:** If you are a maintainer and want to be in the list, please create an issue or make a pull request.
