@@ -45,6 +45,8 @@ class Terminal(object):
             return ['pantheon-terminal', '-e']
         elif self._current_desktop('xfce'):
             return ['xfce4-terminal', '-e']
+        elif self._current_desktop('Hyprland'):
+            return ['kitty', 'sh', '-c']
         elif self._current_desktop('sway'):
             return ['foot', 'sh', '-c']
         elif self._is_command('urxvt'):
